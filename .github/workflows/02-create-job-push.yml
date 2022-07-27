@@ -1,4 +1,4 @@
-name: rigger an Azure Machine Learning job with push (merge)
+name: Trigger an Azure Machine Learning job with push (merge)
 
 on:
   push:
