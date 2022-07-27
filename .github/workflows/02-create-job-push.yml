@@ -1,0 +1,28 @@
+name: rigger an Azure Machine Learning job with push (merge)
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+     - 'src/**'
+
+jobs:
+  train-model:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Set default aml workspace
+      run: |
+        az configure --defaults group="rg-dev-mlops"
+        az configure --defaults workspace="mlw-dev-mlops"
+    - name: Trigger Azure Machine Learning job
+      run: |
+        az ml job create --file src/job.yml
