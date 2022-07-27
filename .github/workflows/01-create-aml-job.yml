@@ -28,7 +28,7 @@ jobs:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Set default aml workspace
       run: |
-        az configure --defaults group ="rg-dev-mlops"
+        az configure --defaults group="rg-dev-mlops"
         az configure --defaults workspace="mlw-dev-mlops"
     - name: Trigger Azure Machine Learning job
       run: |
