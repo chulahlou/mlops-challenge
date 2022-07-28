@@ -80,7 +80,7 @@ jobs:
     - name: Create an endpoint
       run: |
         export ENDPOINT_NAME="diabetes-mlflow-cl"
-        az ml online-endpoint create --name $ENDPOINT_NAME -f src/create-endpoint.yml
+        az ml online-endpoint create --resource-group rg-dev-mlops --workspace mlw-dev-mlops --name $ENDPOINT_NAME -f src/create-endpoint.yml
     - name: Deploy logged model to managed real-time endpoint
       run: |
-        az ml online-deployment create --name mlflow-deployment --endpoint $ENDPOINT_NAME -f src//mlflow-deployment.yml --all-traffic
+        az ml online-deployment create --resource-group rg-dev-mlops --workspace mlw-dev-mlops --name mlflow-deployment --endpoint $ENDPOINT_NAME -f src//mlflow-deployment.yml --all-traffic
