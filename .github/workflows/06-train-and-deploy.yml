@@ -79,7 +79,7 @@ jobs:
         az configure --defaults workspace="${{ github.event.inputs.aml_workspace }}"
     - name: Create an endpoint
       run: |
-        export ENDPOINT_NAME="diabetes-mlflow"
+        export ENDPOINT_NAME="diabetes-mlflow-cl"
         az ml online-endpoint create --name $ENDPOINT_NAME -f src/create-endpoint.yml
     - name: Deploy logged model to managed real-time endpoint
       run: |
