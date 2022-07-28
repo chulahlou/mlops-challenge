@@ -39,7 +39,7 @@ jobs:
   Register:
     runs-on: ubuntu-latest
     environment:
-      name: development
+      name: production
     needs: [Train]
     steps:
     - name: Check out repo
@@ -54,9 +54,9 @@ jobs:
       run: |
         az configure --defaults group="${{ github.event.inputs.resource_group }}"
         az configure --defaults workspace="${{ github.event.inputs.aml_workspace }}"
-    - name: Register model in aml
+    - name: Register model in AML
       run: |  
-        JOB_NAME=$(az ml job list --resource-group 'rg-dev-mlops' --workspace-name 'mlw-dev-mlops' --query "[0].name" | tr -d '"')
+        JOB_NAME=$(az ml job list --resource-group rg-dev-mlops --workspace mlw-dev-mlops --query "[0].name" | tr -d '"')
         az ml model create --name "diabetes-model" --type "mlflow_model" --path "azureml://jobs/$JOB_NAME/outputs/artifacts/model"
   
   Deploy:
